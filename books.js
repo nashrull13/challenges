@@ -33,7 +33,7 @@ module.exports = function(app) {
     try {
       var books = new BooksModel(request.body);
       var result = await books.save();
-      response.send(result);
+      response.status(200).send(result);
     } catch (error) {
       response.status(500).send(error);
     }
@@ -42,7 +42,7 @@ module.exports = function(app) {
   app.get("/books", async (request, response) => {
     try {
       var result = await BooksModel.find().exec();
-      response.send(result);
+      response.status(200).send(result);
     } catch (error) {
       response.status(500).send(error);
     }
@@ -51,7 +51,7 @@ module.exports = function(app) {
   app.get("/books/:id", async (request, response) => {
     try {
       var books = await BooksModel.findById(request.params.id).exec();
-      response.send(books);
+      response.status(200).send(books);
     } catch (error) {
       response.status(500).send(error);
     }
@@ -62,7 +62,7 @@ module.exports = function(app) {
       var books = await BooksModel.findById(request.params.id).exec();
       books.set(request.body);
       var result = await books.save();
-      response.send(result);
+      response.status(200).send(result);
     } catch (error) {
       response.status(500).send(error);
     }
@@ -73,7 +73,7 @@ module.exports = function(app) {
       var result = await BooksModel.deleteOne({
         _id: request.params.id
       }).exec();
-      response.send(result);
+      response.status(200).send(result);
     } catch (error) {
       response.status(500).send(error);
     }
